@@ -266,9 +266,12 @@ jobs:
           echo "Applying SUSFS patches..."
 
           # Copy SUSFS patches
-          cp ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch ./common/
-          cp ../susfs4ksu/kernel_patches/fs/* ./common/fs/
-          cp ../susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
+          curl https://github.com/lyj-random/GKI_KernelSU_SUSFS/blob/main/assets/50_add_susfs_in_gki-android14-6.1.patch > ./common/50_add_susfs_in_gki-android14-6.1.patch
+          curl https://github.com/lyj-random/GKI_KernelSU_SUSFS/blob/main/assets/fs/sus_su.c > ./common/fs/sus_su.c
+          curl https://github.com/lyj-random/GKI_KernelSU_SUSFS/blob/main/assets/fs/susfs.c > ./common/fs/susfs.c
+          curl https://github.com/lyj-random/GKI_KernelSU_SUSFS/blob/main/assets/include/linux/sus_su.h > ./common/include/linux/sus_su.h
+          curl https://github.com/lyj-random/GKI_KernelSU_SUSFS/blob/main/assets/include/linux/susfs.h > ./common/include/linux/susfs.h
+          curl https://github.com/lyj-random/GKI_KernelSU_SUSFS/blob/main/assets/include/linux/susfs_def.h > ./common/include/linux/susfs_def.h
 
           if [ "${{ inputs.kernelsu_variant }}" == "Official" ]; then
             echo "Applying SUSFS patches for Official KernelSU..."
